@@ -57,6 +57,7 @@ struct RMQ {
     }
     
     void setValImpl(int pos, T val, int l, int r, int v) {
+        push(v, l==r); //i think it should, need to check
         if (l==r && r==pos) {
             mas[v] = val;
             return;
