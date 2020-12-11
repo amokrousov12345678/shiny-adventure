@@ -29,6 +29,21 @@ struct pt {
         friend bool operator< (const pt& lhs, const pt & rhs) {
             return lhs.x < rhs.x-eps || (abs(lhs.x - rhs.x) < eps && lhs.y < rhs.y-eps);
         }
+
+        friend ld vp(const pt& lhs, const pt& rhs) {
+            return lhs.x * rhs.y - lhs.y * rhs.x;
+        }
+
+        friend int rotation(const pt& o, const pt& from, const pt& to) {
+            ld Vp = vp(from-o, to-o);
+            if (Vp>eps) return 1;
+            if (Vp<-eps) return -1;
+            return 0;
+        }
+
+        friend bool ccw(const pt& lhs, const pt& rhs) {
+            return vp(lhs, rhs) < -eps;
+        }
     };
 
     struct line {

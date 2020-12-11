@@ -24,11 +24,30 @@ for (int i=2;i<SQRT_MAXN;i++) {
     }
 }
 
-//линейное решето (нужно только для быстрой факторизации), не проверял, ыы
-for (int i=2; i<=MAXN; ++i) {
-    if (sieve[i] == 0) {
+//лин. решето с факторизацией( может пашет а может нет)
+int lp[maxn];
+vector<ll> primes;
+
+
+for (int i=2; i<maxn; ++i) {
+    if (lp[i] == 0) {
         lp[i] = i;
-        primes.push_back (i);
+        primes.push_back(i);
     }
-    for (int j=0; j<(int)pr.size() && primes[j]<=lp[i] && i*primes[j]<=MAXN; ++j)
+    for (int j = 0; j < (int) primes.size() && primes[j] <= lp[i] && i * primes[j] < maxn; ++j)
         lp[i * primes[j]] = primes[j];
+}
+
+//вычисление функции мебиуса по решету ((-1)^cntPrimes если число свободно от квадратов, иначе 0)
+
+int mu[maxn];
+
+mu[1] = 1;
+for (int i=2;i<maxn;i++) {
+    ll pred = i/lp[i];
+    if (pred % lp[i]) {
+        mu[i] = -mu[pred];
+    } else {
+        mu[i] = 0;
+    }
+}

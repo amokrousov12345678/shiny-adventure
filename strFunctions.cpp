@@ -1,3 +1,4 @@
+//z функция
 template<typename T>
     vector<int> calc_z(const T& s) {
         vector<int> z(s.size());
@@ -19,3 +20,22 @@ template<typename T>
         }
         return z;
     }
+
+//префикс функция
+template<typename T>
+vector<int> calc_pi(const T& s) {
+    int n = s.size();
+    vector<int> pi(n);
+    if (n) {
+        pi[0] = 0;
+    }
+    for (int i=1;i<n;i++) {
+        int k = pi[i-1];
+        while (k && s[k]!=s[i]) {
+            k = pi[k-1];
+        }
+        if (s[i]==s[k]) k++;
+        pi[i] = k;
+    }
+    return pi;
+}
