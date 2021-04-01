@@ -2,11 +2,24 @@ SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Werror -fsanitize=address -fsanitize=u
 
 // (clock() - start) * 1.0 / CLOCKS_PER_SEC;
 
+#pragma optimization_level 3
+#pragma GCC optimize("Ofast,no-stack-protector,unroll-loops,fast-math,O3")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx")
+#pragma GCC optimize("Ofast")//Comment optimisations for interactive problems (use endl)
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
 typedef long long ll;
+
+struct None {};
+
+struct Graph {
+	vector<vector<int>> g;
+}
 
 const int INFi = 1e9;
 const ll INFll = 1e18;
@@ -31,8 +44,6 @@ void solve() {
    
 }
 
-
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
@@ -40,9 +51,9 @@ int main() {
     //freopen("input.txt","r",stdin);
     //freopen("output.txt","w",stdout);
     cout << setprecision(15) << fixed;
-    //int t;
+    int t = 1;
     //cin >> t;
-    //for (int i=0;i<t;i++)
-    solve();
+    for (int i=0;i<t;i++)
+		solve();
     return 0;
 }
